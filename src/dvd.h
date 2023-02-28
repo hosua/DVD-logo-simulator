@@ -21,13 +21,12 @@ public:
 	SDL_Renderer* _renderer;
 	SDL_Texture* _texture;
 
-	// Not using this anywhere else so I'm just gonna throw this here
 	struct DVDLogo {
-		int _x, _y;
-		int _x_dir, _y_dir;
-		uint8_t _r, _g, _b;
-		DVDLogo(): _x(SCREEN_W/2), _y(SCREEN_H/2), _x_dir(1), _y_dir(1) { setRandomColor(); }
-		void setRandomColor(); // TODO
+		int x, y;
+		int x_dir, y_dir;
+		uint8_t r, g, b;
+		DVDLogo(): x(SCREEN_W/2), y(SCREEN_H/2), x_dir(1), y_dir(1) { setRandomColor(); }
+		void setRandomColor(); 
 		void updatePos();
 	};
 

@@ -42,10 +42,10 @@ void GFX::clearScreen(){
 }
 
 void GFX::render(){
-	SDL_Rect dest = { .x=_dvd_logo._x, .y=_dvd_logo._y, .w=LOGO_W, .h=LOGO_H };
+	SDL_Rect dest = { .x=_dvd_logo.x, .y=_dvd_logo.y, .w=LOGO_W, .h=LOGO_H };
 	_surface = IMG_Load(DVD_FILENAME);
 	_texture = SDL_CreateTextureFromSurface(_renderer, _surface);
-	SDL_SetTextureColorMod(_texture, _dvd_logo._r, _dvd_logo._g, _dvd_logo._b);
+	SDL_SetTextureColorMod(_texture, _dvd_logo.r, _dvd_logo.g, _dvd_logo.b);
 	SDL_FreeSurface(_surface);
 	SDL_RenderCopy(_renderer, _texture, NULL, &dest);
 	SDL_DestroyTexture(_texture);
@@ -58,21 +58,21 @@ void GFX::renderPresent(){
 // What the hell am I doing with my life
 void GFX::DVDLogo::updatePos(){
 	// TODO: To be implemented	
-	if (_x < 0 || _x+LOGO_W > SCREEN_W){
-		_x_dir *= -1;
+	if (x < 0 || x+LOGO_W > SCREEN_W){
+		x_dir *= -1;
 		setRandomColor();
 	}
-	if (_y < 0 || _y+LOGO_H > SCREEN_H){
-		_y_dir *= -1;
+	if (y < 0 || y+LOGO_H > SCREEN_H){
+		y_dir *= -1;
 		setRandomColor();
 	}
-	_x += _x_dir;
-	_y += _y_dir;
+	x += x_dir;
+	y += y_dir;
 	std::this_thread::sleep_for(std::chrono::milliseconds(5));
 }
 
 void GFX::DVDLogo::setRandomColor(){
-	_r = (std::rand() % (255+1));
-	_g = (std::rand() % (255+1));
-	_b = (std::rand() % (255+1));
+	r = (std::rand() % (255+1));
+	g = (std::rand() % (255+1));
+	b = (std::rand() % (255+1));
 }
