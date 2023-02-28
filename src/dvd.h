@@ -20,31 +20,32 @@ using namespace std;
 extern int g_corner_bounce_counter;
 
 class GFX {
-	public:
-		mutable SDL_Window* _window;
-		mutable SDL_Surface* _surface;
-		mutable SDL_Renderer* _renderer;
-		mutable SDL_Texture* _texture;
+public:
+	GFX(): _window(nullptr), _surface(nullptr), _renderer(nullptr), 
+	_texture(nullptr) { init(); }
 
-		struct DVDLogo {
-			int x, y;
-			int x_dir, y_dir;
-			uint8_t r, g, b;
-			DVDLogo(): x(SCREEN_W/2), y(SCREEN_H/2), x_dir(1), y_dir(1) { setRandomColor(); }
-			void setRandomColor(); 
-			void updatePos();
-		};
+	struct DVDLogo {
+		int x, y;
+		int x_dir, y_dir;
+		uint8_t r, g, b;
+		DVDLogo(): x(SCREEN_W/2), y(SCREEN_H/2), x_dir(1), y_dir(1) { setRandomColor(); }
+		void setRandomColor(); 
+		void updatePos();
+	};
 
-		DVDLogo _dvd_logo;
+	DVDLogo _dvd_logo;
 
-		GFX(): _window(nullptr), _surface(nullptr), _renderer(nullptr), 
-		_texture(nullptr) { init(); }
+	void init();
+	void cleanQuit(bool flag=true) const;
+	void clearScreen() const;
+	void render() const;
+	void renderPresent() const;
 
-		void init();
-		void cleanQuit(bool flag=true) const;
-		void clearScreen() const;
-		void render() const;
-		void renderPresent() const;
+private:
+	mutable SDL_Window* _window;
+	mutable SDL_Surface* _surface;
+	mutable SDL_Renderer* _renderer;
+	mutable SDL_Texture* _texture;
 };
 
 #endif // DVD_H

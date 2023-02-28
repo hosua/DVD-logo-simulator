@@ -4,7 +4,7 @@ SOURCEDIR := $(PROJDIR)/src
 BUILDDIR := $(PROJDIR)/build
 
 # Name of the final executable
-TARGET = dvd-logo
+TARGET = DVD-logo
 
 # Decide whether the commands will be shown or not
 VERBOSE = TRUE

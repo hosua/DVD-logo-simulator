@@ -3,29 +3,34 @@
 int g_corner_bounce_counter = 0;
 
 void GFX::init(){
-	_window = SDL_CreateWindow("Maze", 
-			SDL_WINDOWPOS_CENTERED, 
-			SDL_WINDOWPOS_CENTERED, 
-			SCREEN_W, SCREEN_H, 
-			0);
 
-	if (not _window){
+	_window = SDL_CreateWindow("DVD Logo Simulator", 
+			SDL_WINDOWPOS_CENTERED, 
+			SDL_WINDOWPOS_CENTERED, 
+			SCREEN_W, SCREEN_H, 0);
+
+	if (!_window){
 		fprintf(stderr, "Fatal Error: Window failed to initialize\n");
 		fprintf(stderr, "SDL2 Error: %s\n", SDL_GetError());
 		cleanQuit(false);
 	}
 
 	_renderer = SDL_CreateRenderer(_window, -1, SDL_RENDERER_ACCELERATED);
+
 	_texture = NULL;
 
 	_surface = SDL_GetWindowSurface(_window);
 
-	if (not _surface){
+	if (!_surface){
 		fprintf(stderr, "Failed to get _surface from _window.\n");
 		fprintf(stderr, "SDL2 Error: %s\n", SDL_GetError());
 		cleanQuit(false);
 	}
 
+	// Allow window to be resizable
+	SDL_SetWindowResizable(_window, SDL_TRUE);
+	// Allow resolution independence
+	SDL_RenderSetLogicalSize(_renderer, SCREEN_W, SCREEN_H);
 	// Allows for transparent rendering
 	SDL_SetRenderDrawBlendMode(_renderer, SDL_BLENDMODE_BLEND);
 }
