@@ -17,7 +17,7 @@ using namespace std;
 
 #define FPS 60
 
-extern int g_edge_bounce_counter;
+extern int g_corner_bounce_counter;
 
 class GFX {
 	public:

@@ -1,6 +1,6 @@
 #include "dvd.h"
 
-int g_edge_bounce_counter = 0;
+int g_corner_bounce_counter = 0;
 
 void GFX::init(){
 	_window = SDL_CreateWindow("Maze", 
@@ -35,7 +35,7 @@ void GFX::cleanQuit(bool success) const {
 	SDL_DestroyRenderer(_renderer);
 	SDL_DestroyWindow(_window);
 	SDL_Quit();
-	cout << "Final edge bounce count: " << g_edge_bounce_counter << "\n";
+	cout << "Final corner bounce count: " << g_corner_bounce_counter << "\n";
 	return (success) ? exit(EXIT_SUCCESS) : exit(EXIT_FAILURE);
 }
 
@@ -90,7 +90,7 @@ void GFX::DVDLogo::updatePos(){
 	y += (y_dir*LOGO_VEL);
 
 	if (x_flag && y_flag)
-		cout << "Edge bounce!\tTotal bounces: " << ++g_edge_bounce_counter << "\n";
+		cout << "Edge bounce!\tTotal bounces: " << ++g_corner_bounce_counter << "\n";
 
 	// std::this_thread::sleep_for(std::chrono::milliseconds(5));
 }
