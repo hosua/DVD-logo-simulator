@@ -2,7 +2,7 @@
 
 Will it ever hit the corner? Download now to find out!
 
-If you are on Windows, you don't have to compile anything. You can use the provided `dvd-logo.exe` in the Windows folder, or download one of the releases.
+If you are on Windows, you don't have to compile anything. You can use the provided `dvd-logo.exe` in the `Windows` folder, or download one of the releases.
 
 To exit the program, press `ESC`.
 
