@@ -55,9 +55,7 @@ void GFX::renderPresent(){
 	SDL_RenderPresent(_renderer);
 }
 
-// What the hell am I doing with my life
 void GFX::DVDLogo::updatePos(){
-	// TODO: To be implemented	
 	if (x < 0 || x+LOGO_W > SCREEN_W){
 		x_dir *= -1;
 		setRandomColor();
