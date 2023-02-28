@@ -1,5 +1,7 @@
 #include "dvd.h"
 
+int g_edge_bounce_counter = 0;
+
 void GFX::init(){
 	_window = SDL_CreateWindow("Maze", 
 			SDL_WINDOWPOS_CENTERED, 
@@ -28,20 +30,21 @@ void GFX::init(){
 	SDL_SetRenderDrawBlendMode(_renderer, SDL_BLENDMODE_BLEND);
 }
 
-void GFX::cleanQuit(bool success){
+void GFX::cleanQuit(bool success) const {
 	printf("Quitting, goodbye!\n");
 	SDL_DestroyRenderer(_renderer);
 	SDL_DestroyWindow(_window);
 	SDL_Quit();
+	cout << "Final edge bounce count: " << g_edge_bounce_counter << "\n";
 	return (success) ? exit(EXIT_SUCCESS) : exit(EXIT_FAILURE);
 }
 
-void GFX::clearScreen(){
+void GFX::clearScreen() const {
 	SDL_SetRenderDrawColor(_renderer, 0, 0, 0, 255); // draw black screen
 	SDL_RenderClear(_renderer);
 }
 
-void GFX::render(){
+void GFX::render() const {
 	SDL_Rect dest = { .x=_dvd_logo.x, .y=_dvd_logo.y, .w=LOGO_W, .h=LOGO_H };
 	_surface = IMG_Load(DVD_FILENAME);
 	_texture = SDL_CreateTextureFromSurface(_renderer, _surface);
@@ -51,22 +54,29 @@ void GFX::render(){
 	SDL_DestroyTexture(_texture);
 }
 
-void GFX::renderPresent(){
+void GFX::renderPresent() const { 
 	SDL_RenderPresent(_renderer);
 }
 
 void GFX::DVDLogo::updatePos(){
+	bool x_flag=false, y_flag=false;
 	if (x < 0 || x+LOGO_W > SCREEN_W){
 		x_dir *= -1;
 		setRandomColor();
+		x_flag=true;
 	}
 	if (y < 0 || y+LOGO_H > SCREEN_H){
 		y_dir *= -1;
 		setRandomColor();
+		y_flag = true;
 	}
 	x += x_dir;
 	y += y_dir;
-	std::this_thread::sleep_for(std::chrono::milliseconds(5));
+
+	if (x_flag && y_flag)
+		cout << "Edge bounce!\tTotal bounces: " << ++g_edge_bounce_counter << "\n";
+
+	// std::this_thread::sleep_for(std::chrono::milliseconds(5));
 }
 
 void GFX::DVDLogo::setRandomColor(){

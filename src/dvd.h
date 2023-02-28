@@ -13,31 +13,34 @@ using namespace std;
 #define LOGO_W 230 // dvd-logo-2 (original: 335x150)
 #define LOGO_H 102
 
+extern int g_edge_bounce_counter;
 
 class GFX {
-public:
-	SDL_Window* _window;
-	SDL_Surface* _surface;
-	SDL_Renderer* _renderer;
-	SDL_Texture* _texture;
+	public:
+		mutable SDL_Window* _window;
+		mutable SDL_Surface* _surface;
+		mutable SDL_Renderer* _renderer;
+		mutable SDL_Texture* _texture;
 
-	struct DVDLogo {
-		int x, y;
-		int x_dir, y_dir;
-		uint8_t r, g, b;
-		DVDLogo(): x(SCREEN_W/2), y(SCREEN_H/2), x_dir(1), y_dir(1) { setRandomColor(); }
-		void setRandomColor(); 
-		void updatePos();
-	};
+		struct DVDLogo {
+			int x, y;
+			int x_dir, y_dir;
+			uint8_t r, g, b;
+			DVDLogo(): x(SCREEN_W/2), y(SCREEN_H/2), x_dir(1), y_dir(1) { setRandomColor(); }
+			void setRandomColor(); 
+			void updatePos();
+		};
 
-	DVDLogo _dvd_logo;
+		DVDLogo _dvd_logo;
 
-	GFX(): _window(nullptr), _surface(nullptr), _renderer(nullptr), _texture(nullptr){ init(); }
-	void init();
-	void cleanQuit(bool flag=true);
-	void clearScreen();
-	void render();
-	void renderPresent();
+		GFX(): _window(nullptr), _surface(nullptr), _renderer(nullptr), 
+		_texture(nullptr) { init(); }
+
+		void init();
+		void cleanQuit(bool flag=true) const;
+		void clearScreen() const;
+		void render() const;
+		void renderPresent() const;
 };
 
 #endif // DVD_H

@@ -15,6 +15,8 @@ int main(){
 				case SDLK_ESCAPE:
 					gfx->cleanQuit();
 					break;
+				default:
+					break;
 			}
 		}
 		gfx->_dvd_logo.updatePos();
