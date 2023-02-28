@@ -22,7 +22,7 @@ void GFX::init(){
 
 	if (not _surface){
 		fprintf(stderr, "Failed to get _surface from _window.\n");
-		fprintf(stderr, "SDL2 Error: %s", SDL_GetError());
+		fprintf(stderr, "SDL2 Error: %s\n", SDL_GetError());
 		cleanQuit(false);
 	}
 
@@ -72,7 +72,7 @@ void GFX::DVDLogo::updatePos(){
 	if (x < 0 || x+LOGO_W > SCREEN_W){
 		x_dir *= -1;
 		setRandomColor();
-		x_flag=true;
+		x_flag = true;
 	}
 	if (y < 0 || y+LOGO_H > SCREEN_H){
 		y_dir *= -1;
@@ -83,9 +83,8 @@ void GFX::DVDLogo::updatePos(){
 	y += (y_dir*LOGO_VEL);
 
 	if (x_flag && y_flag)
-		cout << "Edge bounce!\tTotal bounces: " << ++g_corner_bounce_counter << "\n";
+		cout << "Corner bounce!\tTotal bounces: " << ++g_corner_bounce_counter << "\n";
 
-	// std::this_thread::sleep_for(std::chrono::milliseconds(5));
 }
 
 void GFX::DVDLogo::setRandomColor(){

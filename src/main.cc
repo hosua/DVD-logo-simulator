@@ -10,15 +10,11 @@ int main(int argc, char *argv[]){
 
 	while (1){
 		SDL_Event event;
-		while (SDL_PollEvent(&event)){
-			switch(event.key.keysym.sym){
-				case SDLK_ESCAPE:
-					gfx->cleanQuit();
-					break;
-				default:
-					break;
-			}
-		}
+
+		while (SDL_PollEvent(&event))
+			if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE)
+				gfx->cleanQuit();
+
 		gfx->_dvd_logo.updatePos();
 		gfx->clearScreen();
 		gfx->render();
