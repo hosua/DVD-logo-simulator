@@ -68,7 +68,7 @@ void GFX::DVDLogo::updatePos(){
 	}
 	_x += _x_dir;
 	_y += _y_dir;
-	std::this_thread::sleep_for(std::chrono::milliseconds(3));
+	std::this_thread::sleep_for(std::chrono::milliseconds(5));
 }
 
 void GFX::DVDLogo::setRandomColor(){
