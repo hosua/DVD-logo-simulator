@@ -1,6 +1,6 @@
 #include "dvd.h"
 
-int main(){
+int main(int argc, char *argv[]){
 	GFX* gfx = new GFX();
 	gfx->clearScreen();
 	if (SDL_Init(SDL_INIT_EVERYTHING)){ 
