@@ -57,20 +57,13 @@ void GFX::render() const {
 // Also limits FPS
 void GFX::renderPresent() const { 
 	static double clock = 0;
-    double deltaticks;
-    double newclock = SDL_GetTicks();
+    double new_clock = SDL_GetTicks();
+    double delta = (1000.0/FPS)-(new_clock-clock);
 
-    deltaticks = 1000.0 / FPS - (newclock - clock);
+    if (floor(delta) > 0)
+        SDL_Delay(delta);
 
-    if (floor(deltaticks) > 0)
-        SDL_Delay(deltaticks);
-
-    if (deltaticks < -30) {
-        clock = newclock - 30;
-    } else {
-        clock = newclock + deltaticks;
-    }
-
+    clock = (delta < -30) ?  new_clock-30 : new_clock+delta;
 	SDL_RenderPresent(_renderer);
 }
 
