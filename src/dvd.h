@@ -10,8 +10,12 @@ using namespace std;
 #define DVD_FILENAME "img/dvd-logo.png"
 #define SCREEN_W 1280
 #define SCREEN_H 720
-#define LOGO_W 230 // dvd-logo-2 (original: 335x150)
+
+#define LOGO_W 230 // 335x150
 #define LOGO_H 102
+#define LOGO_VEL 3
+
+#define FPS 60
 
 extern int g_edge_bounce_counter;
 

@@ -54,7 +54,23 @@ void GFX::render() const {
 	SDL_DestroyTexture(_texture);
 }
 
+// Also limits FPS
 void GFX::renderPresent() const { 
+	static double clock = 0;
+    double deltaticks;
+    double newclock = SDL_GetTicks();
+
+    deltaticks = 1000.0 / FPS - (newclock - clock);
+
+    if (floor(deltaticks) > 0)
+        SDL_Delay(deltaticks);
+
+    if (deltaticks < -30) {
+        clock = newclock - 30;
+    } else {
+        clock = newclock + deltaticks;
+    }
+
 	SDL_RenderPresent(_renderer);
 }
 
@@ -70,8 +86,8 @@ void GFX::DVDLogo::updatePos(){
 		setRandomColor();
 		y_flag = true;
 	}
-	x += x_dir;
-	y += y_dir;
+	x += (x_dir*LOGO_VEL);
+	y += (y_dir*LOGO_VEL);
 
 	if (x_flag && y_flag)
 		cout << "Edge bounce!\tTotal bounces: " << ++g_edge_bounce_counter << "\n";
