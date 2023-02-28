@@ -9,6 +9,14 @@ int main(){
 	}
 
 	while (1){
+		SDL_Event event;
+		while (SDL_PollEvent(&event)){
+			switch(event.key.keysym.sym){
+				case SDLK_ESCAPE:
+					gfx->cleanQuit();
+					break;
+			}
+		}
 		gfx->_dvd_logo.updatePos();
 		gfx->clearScreen();
 		gfx->render();
