@@ -7,7 +7,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define DVD_FILENAME "img/dvd-logo.png"
+#define DVD_FILENAME "assets/dvd-logo.png"
 #define SCREEN_W 1280
 #define SCREEN_H 720
 
